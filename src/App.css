@@ -1,38 +1,352 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;700&display=swap");
+
+/* main */
+.mainWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Maven Pro", sans-serif;
+  flex-direction: column;
+  /* overflow-x: hidden; */
+  gap: 20px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* navbar */
+.navabr {
+  width: 94.5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+  padding: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  position: sticky;
+  top: 0;
+  box-shadow: 0 0 10px #b49acd;
+}
+.logo img {
+  width: 100px;
+  height: 55px;
+  border-radius: 10px;
+}
+.tabs {
+  display: flex;
+  gap: 20px;
+  font-family: "Open Sans", sans-serif;
+}
+.tab {
+  font-size: 20px;
+  cursor: pointer;
+}
+.profileWrapper {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+.profileWrapper span {
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.bell,
+.profile,
+.ham {
+  font-size: 30px;
+  cursor: pointer;
+}
+.dropdown {
+  position: absolute;
+  top: 4.5rem;
+  right: 0.8rem;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: white;
+  border: 1px solid grey;
+  list-style: none;
+}
+.dropdown::before {
+  content: "";
+  position: absolute;
+  top: -0.4rem;
+  right: 1.3rem;
+  width: 10px;
+  height: 10px;
+  transform: rotate(45deg);
+  background-color: white;
+  border-left: 1px solid grey;
+  border-top: 1px solid grey;
+}
+.msg-dropdown {
+  position: absolute;
+  top: 4.5rem;
+  right: 6.5rem;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: white;
+  border: 1px solid grey;
+  list-style: none;
+  min-width: 100px;
+}
+.msg-dropdown::before {
+  content: "";
+  position: absolute;
+  top: -0.4rem;
+  right: 0.8rem;
+  width: 10px;
+  height: 10px;
+  transform: rotate(45deg);
+  background-color: white;
+  border-left: 1px solid grey;
+  border-top: 1px solid grey;
+}
+.dropdown li,
+.msg-dropdown li {
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.hamburger {
+  display: none;
+}
+.hamburger span {
+  font-size: 30px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.menu {
+  position: absolute;
+  top: 4.5rem;
+  right: 0.8rem;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: white;
+  border: 1px solid grey;
+  list-style: none;
+}
+.menu::before {
+  content: "";
+  position: absolute;
+  top: -0.4rem;
+  right: 1.3rem;
+  width: 10px;
+  height: 10px;
+  transform: rotate(45deg);
+  background-color: white;
+  border-left: 1px solid grey;
+  border-top: 1px solid grey;
+}
+.userName {
+  padding: 10px 30px;
+}
+.notifications {
+  background-color: #8ec5fc;
+  padding: 5px;
+  padding-left: 13px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.logout {
+  background-color: lightcoral;
+  padding: 5px;
+  padding-left: 30px;
+  border-radius: 5px;
+}
+/* background: linear-gradient(109.6deg, rgb(245, 239, 249) 30.1%, rgb(207, 211, 236) 100.2%); */
+
+/* feedWrapper */
+
+.feedWrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 70%;
+  gap: 30px;
+  margin: 30px 0;
+}
+
+/* blogs */
+
+.blogWrapper {
+  padding: 30px;
+  border: 1px solid lightslategray;
+  border-radius: 10px;
+  box-shadow: 0 0 10px lightslategray;
+  background: linear-gradient(
+    109.6deg,
+    rgb(237, 215, 251) 30.1%,
+    rgb(199, 206, 249) 100.2%
+  );
+}
+.blogWrapper .body p {
+  font-size: 20px;
+}
+.blogWrapper .body .keyWords {
+  display: flex;
+  flex-wrap: wrap;
+}
+.blogWrapper .body .keyword {
+  font-size: 18px;
+  padding: 5px;
+  color: #0982fc;
+}
+.blogWrapper .catagories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.catagories .catagory {
+  background-color: #b49acd;
+  border-radius: 5px;
+  padding: 5px;
+  color: #0f0c11;
+}
+.timeWrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.time {
+  margin: 0;
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+}
+.ratingSection {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding-right: 10px;
+}
+.avergeStars {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-end;
+}
+.avergeStars span {
+  margin: 0;
+  font-size: 16px;
+  padding-right: 10px;
+  font-weight: 100;
+}
+.ratingWrapper {
+  padding: 10px;
+}
+.comments {
   display: flex;
   flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+}
+.comWrapper h3 {
+  margin: 0;
+  padding: 10px;
+  background-color: #c0c0fc;
+  font-size: 18px;
+}
+.com h4 {
+  margin: 0;
+  color: #161617;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.com h6 {
+  margin: 0;
+  margin-top: 10px;
+  color: #161617;
+  font-size: 14px;
+  font-weight: 200;
+}
+
+.addComment {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 10px;
+  padding: 10px;
+  background-color: rgb(218, 203, 246);
+  border: 1px solid rgb(62, 52, 82);
+  box-shadow: 0 0 5px rgb(62, 52, 82);
+  border-radius: 10px;
 }
-
-.App-link {
-  color: #61dafb;
+.addComment .comInput {
+  flex: 1;
+  font-size: 16px;
+  padding: 8px;
+  border-radius: 10px;
 }
+.addComment .comBtn {
+  background-color: #b49acd;
+  box-shadow: 0 0 10px #b49acd;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  font-size: 20px;
+}
+@media only screen and (max-width: 450px) {
+  /* navbar */
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .navabr {
+    width: 90%;
+    padding-right: 30px;
   }
-  to {
-    transform: rotate(360deg);
+  .profile,
+  .dropdown {
+    display: none;
+  }
+  .bell {
+    display: none;
+  }
+  .msg-dropdown {
+    top: 4.5rem;
+    right: 1.2rem;
+  }
+  .msg-dropdown::before {
+    top: -0.4rem;
+    right: 0.8rem;
+  }
+  .logo img {
+    width: 80px;
+    height: 40px;
+    border-radius: 10px;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .tabs {
+    gap: 10px;
+  }
+  .tab {
+    font-size: 16px;
+  }
+
+  /* blogs */
+
+  .feedWrapper {
+    width: 85%;
+  }
+  .author.truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .addComment .comInput {
+    width: 100px;
+    font-size: 16px;
+  }
+  .addComment .comBtn {
+    width: 20px;
+    height: 20px;
+  }
+  .addComment {
+    display: flex;
+    gap: 5px;
+    padding: 10px;
   }
 }
