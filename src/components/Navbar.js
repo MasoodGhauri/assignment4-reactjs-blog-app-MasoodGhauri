@@ -1,12 +1,27 @@
 import { useState } from "react";
-import { IoMdNotifications } from "react-icons/io";
+import { GoBellFill } from "react-icons/go";
 import { FaCircleUser } from "react-icons/fa6";
 import { RiMenu3Fill } from "react-icons/ri";
+import { useLoggedIn } from "../hooks/useLoggedIn";
+import { useUserLoggedIn } from "../hooks/useUserLoggedIn";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [dropdownFlag, setDropdownFlag] = useState(true);
   const [msgDropdownFlag, setMsgDropdownFlag] = useState(true);
   const [mobileMenuFlag, setMobileMenuFlag] = useState(true);
+
+  const useLoggedInHook = useLoggedIn();
+  const useUserHook = useUserLoggedIn();
+  const loggedInFlag = useLoggedInHook.loggedIn;
+  const navigate = useNavigate();
+
+  const logoutUser = () => {
+    localStorage.removeItem("lightToken");
+    useUserHook.setUser({ user: {}, token: "" });
+    useLoggedInHook.toggleLoggedIn();
+    navigate("/");
+  };
 
   return (
     <div className="navabr">
@@ -14,11 +29,20 @@ const Navbar = () => {
         <img src="light.png" alt="logo" />
       </div>
       <div className="tabs">
-        <h2 className="tab">For You</h2>
-        <h2 className="tab">Following</h2>
+        {loggedInFlag && (
+          <Link to="/following">
+            <h2 className="tab">Following</h2>
+          </Link>
+        )}
+        <Link to="/">
+          <h2 className="tab">For You</h2>
+        </Link>
       </div>
-      <div className="profileWrapper">
-        <IoMdNotifications
+      <div
+        className="profileWrapper"
+        style={{ display: !loggedInFlag ? "none" : "flex" }}
+      >
+        <GoBellFill
           className="bell"
           onClick={() => {
             setMsgDropdownFlag(!msgDropdownFlag);
@@ -36,12 +60,21 @@ const Navbar = () => {
           }}
         />
         <ul className="dropdown" hidden={dropdownFlag}>
-          <li className="userName">Masood</li>
+          <li className="userName" onClick={() => navigate("/profile")}>
+            {useUserHook.user.Username}
+          </li>
           <hr />
-          <li className="logout">Logout</li>
+          <li className="logout" onClick={logoutUser}>
+            Logout
+          </li>
         </ul>
       </div>
-      <div className="hamburger">
+      <div
+        className="hamburger"
+        style={{
+          display: !loggedInFlag && window.innerWidth < 450 ? "none" : "block",
+        }}
+      >
         <RiMenu3Fill
           className="ham"
           onClick={() => {
@@ -50,7 +83,9 @@ const Navbar = () => {
           }}
         />
         <ul className="menu" hidden={mobileMenuFlag}>
-          <li className="userName">Masood</li>
+          <li className="userName" onClick={() => navigate("/profile")}>
+            Masood
+          </li>
           <hr />
           <li
             className="notifications"
@@ -61,9 +96,14 @@ const Navbar = () => {
           >
             Notifications
           </li>
-          <li className="logout">Logout</li>
+          <li className="logout" onClick={logoutUser}>
+            Logout
+          </li>
         </ul>
       </div>
+      <Link to="/login" hidden={loggedInFlag}>
+        <button className="navLoginBtn">Login</button>
+      </Link>
     </div>
   );
 };

@@ -1,5 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;700&display=swap");
 
+/* global error and success classes */
+.error,
+.success,
+.loading {
+  background-color: lightcoral;
+  font-size: 16px;
+  margin: 0;
+  padding: 5px;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+}
+.success {
+  background-color: lightgreen;
+}
+.loading {
+  background-color: lightblue;
+}
+
 /* main */
 .mainWrapper {
   display: flex;
@@ -36,10 +55,20 @@
   gap: 20px;
   font-family: "Open Sans", sans-serif;
 }
+.tabs a {
+  text-decoration: none;
+}
 .tab {
   font-size: 20px;
   cursor: pointer;
+  color: black;
+  padding: 5px;
+  border-radius: 5px;
 }
+.tab:hover {
+  background-color: #a4a4ea;
+}
+
 .profileWrapper {
   display: flex;
   gap: 40px;
@@ -60,7 +89,7 @@
 .dropdown {
   position: absolute;
   top: 4.5rem;
-  right: 0.8rem;
+  right: 1.8rem;
   padding: 15px;
   border-radius: 10px;
   background-color: white;
@@ -117,7 +146,7 @@
 .menu {
   position: absolute;
   top: 4.5rem;
-  right: 0.8rem;
+  right: 1.3rem;
   padding: 15px;
   border-radius: 10px;
   background-color: white;
@@ -173,10 +202,14 @@
   border-radius: 10px;
   box-shadow: 0 0 10px lightslategray;
   background: linear-gradient(
-    109.6deg,
+    110.6deg,
     rgb(237, 215, 251) 30.1%,
-    rgb(199, 206, 249) 100.2%
+    rgb(199, 206, 249) 90.2%
   );
+}
+.blogWrapper .top {
+  display: flex;
+  align-items: center;
 }
 .blogWrapper .body p {
   font-size: 20px;
@@ -200,6 +233,18 @@
   border-radius: 5px;
   padding: 5px;
   color: #0f0c11;
+}
+.titleEdit,
+.bodyEdit {
+  width: 90%;
+  border: none;
+  background: transparent;
+  padding: 20px 10px;
+  margin: 10px;
+  font-size: 18px;
+}
+.bodyEdit {
+  height: 170px;
 }
 .timeWrapper {
   display: flex;
@@ -289,6 +334,154 @@
   height: 18px;
   font-size: 20px;
 }
+
+.navLoginBtn {
+  /* display: none; */
+  border: none;
+  border-radius: 5px;
+  background-color: #161617;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* login */
+.authPages {
+  margin-top: 20vh;
+}
+.loginWrapper {
+  width: 350px;
+  background: linear-gradient(120deg, #e0c3fc 20%, #8ec5fc 100%);
+  box-shadow: 0 0 10px linear-gradient(120deg, #e0c3fc 20%, #8ec5fc 100%);
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.login {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  align-items: center;
+}
+.login h3 {
+  font-size: 24px;
+  margin: 20px;
+}
+.loginInputWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.inputWrap {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+}
+.inputWrap .inputCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+.inputWrap :nth-child(1) {
+  justify-content: space-around;
+}
+.inputCol input {
+  padding: 5px;
+  font-size: 18px;
+}
+.inputCol label {
+  font-size: 18px;
+}
+.authBtn {
+  width: 100px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  transition: transform 0.7s ease;
+  cursor: pointer;
+}
+.authBtn:active {
+  transform: scale(0.7);
+}
+.changeAuthwrap {
+  display: flex;
+  gap: 10px;
+}
+/* .login .error,
+.success {
+  background-color: lightcoral;
+  font-size: 16px;
+  margin: 0;
+  padding: 5px;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+}
+.login .success {
+  background-color: lightgreen;
+} */
+
+/* Profile */
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 2px solid #e0c3fc;
+  box-shadow: 0 0 10px #e0c3fc;
+  border-radius: 10px;
+  padding: 20px;
+}
+.details .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  padding-bottom: 0;
+}
+.details .top .userName {
+  margin: 0;
+  padding: 10px;
+  font-size: 50px;
+}
+.details .top .userName span {
+  font-size: 14px;
+  font-weight: 200;
+  cursor: default;
+}
+.details .top button {
+  width: 70px;
+  height: 30px;
+}
+.details .middle {
+  display: flex;
+  padding: 10px 20px;
+  gap: 80px;
+}
+.middle p span {
+  margin-right: 20px;
+  font-size: 30px;
+  cursor: default;
+}
+.details .followWrap {
+  display: flex;
+  padding: 10px 40px;
+}
+.followWrap .followCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.followCol .followNumber {
+  margin: 0;
+  font-size: 30px;
+}
+.followCol .followTag {
+  margin: 0 10px;
+}
+
 @media only screen and (max-width: 450px) {
   /* navbar */
 
@@ -305,7 +498,7 @@
   }
   .msg-dropdown {
     top: 4.5rem;
-    right: 1.2rem;
+    right: 1.7rem;
   }
   .msg-dropdown::before {
     top: -0.4rem;
@@ -324,6 +517,9 @@
   }
   .tab {
     font-size: 16px;
+  }
+  .navLoginBtn {
+    font-size: 12px;
   }
 
   /* blogs */
@@ -348,5 +544,52 @@
     display: flex;
     gap: 5px;
     padding: 10px;
+  }
+
+  /* Logins */
+  .authPages {
+    margin-top: 25vh;
+  }
+  .loginWrapper {
+    width: 250px;
+  }
+  .inputCol input {
+    width: 150px;
+  }
+
+  /* profile */
+  .details {
+    gap: 0;
+    padding: 10px;
+  }
+  .details .top {
+    padding: 10px;
+    padding-bottom: 0;
+  }
+  .details .top .userName {
+    margin: 0;
+    padding: 10px;
+    font-size: 30px;
+  }
+  .details .top .userName span {
+    font-size: 14px;
+    font-weight: 200;
+    cursor: default;
+  }
+  .details .top button {
+    width: 70px;
+    height: 30px;
+  }
+  /*  */
+  .details .middle {
+    display: flex;
+    padding: 10px 20px;
+    gap: 30px;
+  }
+  .middle p {
+    font-size: 12px;
+  }
+  .middle p span {
+    font-size: 18px;
   }
 }
