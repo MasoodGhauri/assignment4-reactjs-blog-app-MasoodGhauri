@@ -31,7 +31,7 @@ const Profile = () => {
                 <h4 className="followNumber">{user.FollowedBy.length}</h4>
                 <p className="followTag">Followers</p>
             </div>
-            <hr />
+            <hr/>
             <div className="followCol">
                 <h4 className="followNumber">{user.Following.length}</h4>
                 <p className="followTag">Following</p>

@@ -38,6 +38,8 @@ const Navbar = () => {
           <h2 className="tab">For You</h2>
         </Link>
       </div>
+
+      {/* for bigger screen */}
       <div
         className="profileWrapper"
         style={{ display: !loggedInFlag ? "none" : "flex" }}
@@ -69,10 +71,11 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
+      {/* for smaller screens */}
       <div
         className="hamburger"
         style={{
-          display: !loggedInFlag && window.innerWidth < 450 ? "none" : "block",
+          display: loggedInFlag && window.innerWidth < 450 ? "block" : "none",
         }}
       >
         <RiMenu3Fill

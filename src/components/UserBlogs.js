@@ -8,6 +8,10 @@ const UserBlogs = () => {
   const [loading, setLoading] = useState(null);
   const useUserHook = useUserLoggedIn();
 
+  const removeBlog = (id) => {
+    setBlogList(blogList.filter((b) => b._id !== id));
+  };
+
   useEffect(() => {
     setLoading("Loading...");
 
@@ -20,11 +24,24 @@ const UserBlogs = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setLoading(null);
-        setBlogList(data.Blogs);
-        setErrorMsg(null);
+        if (data.Success === false) {
+          setErrorMsg(data.Message);
+          setLoading(null);
+        } else {
+          if (data.Blogs.length === 0) {
+            setLoading("Post your first blog");
+          } else {
+            setBlogList(data.Blogs);
+            setLoading(null);
+            setErrorMsg(null);
+          }
+        }
       })
-      .catch((err) => setErrorMsg("Error Fetching data"));
+      .catch((err) => {
+        console.log(err);
+        setErrorMsg("Error Fetching data");
+        setLoading(null);
+      });
     // }, [blogList]);
   }, []);
 
@@ -34,7 +51,7 @@ const UserBlogs = () => {
       {errorMsg && <p className="error">{errorMsg}</p>}
       {blogList &&
         blogList.map((b, i) => {
-          return <EditBlog key={i} blog={b} />;
+          return <EditBlog key={i} blog={b} removeBlog={removeBlog} />;
         })}
     </div>
   );

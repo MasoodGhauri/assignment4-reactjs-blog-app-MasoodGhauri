@@ -7,7 +7,7 @@ import { RiDeleteBin6Fill } from "react-icons/ri";
 import { useState } from "react";
 import { useUserLoggedIn } from "../hooks/useUserLoggedIn";
 
-const EditBlog = ({ blog }) => {
+const EditBlog = ({ blog, removeBlog }) => {
   let flag = false;
   if (blog.Status === "active") {
     flag = false;
@@ -102,6 +102,31 @@ const EditBlog = ({ blog }) => {
       .catch((err) => setErrorMsg("Something went wrong! try again"));
   };
 
+  const deleteBlog = () => {
+    fetch(process.env.REACT_APP_BASE_URL + "/blog/delete", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        token: useUserHook.token,
+      },
+      body: JSON.stringify({
+        id: blog._id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.Success === true) {
+          setSuccessMsg(data.Message);
+          setErrorMsg(null);
+          setTimeout(() => setSuccessMsg(null), 2000);
+          removeBlog(blog._id);
+        } else {
+          setErrorMsg("Session expired! Login Again");
+        }
+      })
+      .catch((err) => setErrorMsg("Something went wrong! try again"));
+  };
+
   const [successMsg, setSuccessMsg] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [hiddenBlogFlag, setHiddenBlogFlag] = useState(flag);
@@ -127,7 +152,7 @@ const EditBlog = ({ blog }) => {
           onClick={setActivate}
           style={{ display: hiddenBlogFlag ? "none" : "block" }}
         />
-        {/* <RiDeleteBin6Fill onClick={deleteBlog} /> */}
+        <RiDeleteBin6Fill onClick={deleteBlog} />
       </div>
       <div className="top">
         <h2 className="title" hidden={editFlag}>

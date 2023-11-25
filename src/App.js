@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Signup from "./components/Signup";
 import Profile from "./components/Profile";
 import UserBlogs from "./components/UserBlogs";
+import CreateNew from "./components/CreateNew";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
               <>
                 <Navbar />
                 <Profile />
+                <CreateNew />
                 <UserBlogs />
               </>
             }
