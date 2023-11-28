@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar";
 import Signup from "./components/Signup";
 import Profile from "./components/Profile";
 import UserBlogs from "./components/UserBlogs";
-import CreateNew from "./components/CreateNew";
+import UserList from "./components/UserList";
 
 function App() {
   return (
@@ -37,7 +37,25 @@ function App() {
               <>
                 <Navbar />
                 <Profile />
-                <CreateNew />
+                <UserBlogs />
+              </>
+            }
+          />
+          <Route
+            path="/allUsers"
+            element={
+              <>
+                <Navbar />
+                <UserList />
+              </>
+            }
+          />
+          <Route
+            path="/viewprofile/:id"
+            element={
+              <>
+                <Navbar />
+                <Profile />
                 <UserBlogs />
               </>
             }

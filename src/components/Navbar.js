@@ -37,6 +37,11 @@ const Navbar = () => {
         <Link to="/">
           <h2 className="tab">For You</h2>
         </Link>
+        {loggedInFlag && useUserHook.user.UserRole === "admin" && (
+          <Link to="/allUsers">
+            <h2 className="tab">Users</h2>
+          </Link>
+        )}
       </div>
 
       {/* for bigger screen */}

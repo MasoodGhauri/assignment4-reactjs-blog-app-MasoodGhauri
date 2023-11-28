@@ -177,7 +177,7 @@
 .logout {
   background-color: lightcoral;
   padding: 5px;
-  padding-left: 30px;
+  text-align: center;
   border-radius: 5px;
 }
 /* background: linear-gradient(109.6deg, rgb(245, 239, 249) 30.1%, rgb(207, 211, 236) 100.2%); */
@@ -187,6 +187,7 @@
 .feedWrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
   width: 70%;
   gap: 30px;
@@ -205,11 +206,26 @@
     rgb(237, 215, 251) 30.1%,
     rgb(199, 206, 249) 90.2%
   );
+  width: 100%;
 }
 .blogWrapper .top {
   display: flex;
   align-items: center;
 }
+.blogWrapper .author {
+  background-color: #b3b3e7;
+  padding: 5px;
+  border: 1px solid #b3b3e7;
+  cursor: pointer;
+  font-size: 22px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #b3b3e7;
+  transition: 1s ease;
+}
+.blogWrapper .author:active {
+  transform: scale(0.9);
+}
+
 .blogWrapper .body p {
   font-size: 20px;
 }
@@ -285,11 +301,27 @@
   gap: 15px;
   padding: 20px;
 }
+
+.comWrapper .commentControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #c0c0fc;
+  padding: 5px;
+}
 .comWrapper h3 {
   margin: 0;
   padding: 10px;
-  background-color: #c0c0fc;
   font-size: 18px;
+}
+.commentControls .showCom,
+.commentControls .hideCom {
+  margin: 5px;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+  background-color: #b3b3e7;
+  cursor: pointer;
 }
 .com h4 {
   margin: 0;
@@ -311,9 +343,9 @@
   align-items: center;
   gap: 10px;
   padding: 10px;
-  background-color: rgb(218, 203, 246);
-  border: 1px solid rgb(62, 52, 82);
-  box-shadow: 0 0 5px rgb(62, 52, 82);
+  background-color: #c0c0fc;
+  box-shadow: 0 0 5px #b3b3e7;
+  border: 1px solid #b3b3e7;
   border-radius: 10px;
 }
 .addComment .comInput {
@@ -329,9 +361,13 @@
   border: none;
   padding: 10px;
   cursor: pointer;
-  width: 18px;
-  height: 18px;
-  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  font-size: 10px;
+  transition: 1s ease;
+}
+.addComment .comBtn:active {
+  transform: scale(0.9);
 }
 
 .navLoginBtn {
@@ -342,6 +378,14 @@
   color: white;
   padding: 10px;
   font-size: 16px;
+}
+
+/* rating */
+.ratingWrapper {
+  transition: 1s ease;
+}
+.ratingWrapper:active {
+  transform: scale(1.9);
 }
 
 /* login */
@@ -437,15 +481,24 @@
   font-weight: 200;
   cursor: default;
 }
-.details .top button {
-  width: 70px;
-  height: 30px;
+.followBtn {
+  height: 50px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  transition: transform 0.7s ease;
 }
+.followBtn:active {
+  transform: scale(0.7);
+}
+
 .details .middle {
   display: flex;
   padding: 10px 20px;
   gap: 80px;
 }
+
 .middle p span {
   margin-right: 20px;
   font-size: 30px;
@@ -498,6 +551,58 @@
   padding: 5px;
 }
 
+/* user */
+
+.userList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 80%;
+  margin-bottom: 30px;
+}
+.userWrap {
+  padding: 10px;
+  background-color: #c5e0fb;
+  box-shadow: 0 0 10px #c5e0fb;
+  border-radius: 5px;
+}
+.userCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  gap: 10px;
+}
+.userCard .detail {
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
+}
+.userCard .edit {
+  display: flex;
+  gap: 18%;
+}
+.userCard .edit input {
+  padding: 5px;
+  font-size: 16px;
+  border-radius: 5px;
+  background: transparent;
+}
+.userCard h5 {
+  font-weight: 400;
+  font-size: 18px;
+  margin: 0;
+}
+.userCard .controlsWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  background-color: #aed4fa;
+  padding: 10px;
+  box-shadow: 0 0 10px rgb(157, 237, 237);
+  border-radius: 5px;
+}
+
 @media only screen and (max-width: 450px) {
   /* navbar */
 
@@ -541,11 +646,6 @@
 
   .feedWrapper {
     width: 85%;
-  }
-  .author.truncate {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
   }
   .addComment .comInput {
     width: 100px;
@@ -611,5 +711,10 @@
   /* create blog */
   .createNew {
     width: 150px;
+  }
+  /* admin */
+  .userCard .edit {
+    flex-direction: column;
+    gap: 0;
   }
 }

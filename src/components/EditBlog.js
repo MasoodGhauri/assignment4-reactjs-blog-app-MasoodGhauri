@@ -7,13 +7,17 @@ import { RiDeleteBin6Fill } from "react-icons/ri";
 import { useState } from "react";
 import { useUserLoggedIn } from "../hooks/useUserLoggedIn";
 
-const EditBlog = ({ blog, removeBlog }) => {
+const EditBlog = ({ blog, removeBlog, viewFlag }) => {
   let flag = false;
   if (blog.Status === "active") {
     flag = false;
   } else {
     flag = true;
   }
+
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState(blog.Comments);
+  const [showFlag, setShowFlag] = useState(false);
 
   const calculateAverageStars = (ratingStars) => {
     if (!ratingStars || ratingStars.length === 0) {
@@ -57,7 +61,6 @@ const EditBlog = ({ blog, removeBlog }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.Success === true) {
           setSuccessMsg(data.Message);
           setEditFlag(!editFlag);
@@ -116,15 +119,44 @@ const EditBlog = ({ blog, removeBlog }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.Success === true) {
-          setSuccessMsg(data.Message);
           setErrorMsg(null);
-          setTimeout(() => setSuccessMsg(null), 2000);
           removeBlog(blog._id);
         } else {
           setErrorMsg("Session expired! Login Again");
         }
       })
       .catch((err) => setErrorMsg("Something went wrong! try again"));
+  };
+
+  const addComent = () => {
+    if (comment !== "") {
+      fetch(process.env.REACT_APP_BASE_URL + "/blog/comment", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          token: useUserHook.token,
+        },
+        body: JSON.stringify({
+          comment: comment,
+          blogId: blog._id,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.Success === true) {
+            setSuccessMsg(data.Message);
+            setComments([data.Comment, ...comments]);
+            setTimeout(() => {
+              setSuccessMsg(null);
+            }, 4000);
+            setComment("");
+            setErrorMsg(null);
+          } else {
+            setErrorMsg("Session expired! Login Again");
+          }
+        })
+        .catch((err) => setErrorMsg("Something went wrong! try again"));
+    }
   };
 
   const [successMsg, setSuccessMsg] = useState(null);
@@ -144,15 +176,30 @@ const EditBlog = ({ blog, removeBlog }) => {
       {errorMsg && <p className="error">{errorMsg}</p>}
       <div className="timeWrapper">
         <p className="time">{time}</p>
-        <FaGlobeAmericas
-          onClick={setActivate}
-          style={{ display: hiddenBlogFlag ? "block" : "none" }}
-        />
-        <ImEyeBlocked
-          onClick={setActivate}
-          style={{ display: hiddenBlogFlag ? "none" : "block" }}
-        />
-        <RiDeleteBin6Fill onClick={deleteBlog} />
+        {viewFlag === false && (
+          <FaGlobeAmericas
+            onClick={setActivate}
+            style={{
+              display: hiddenBlogFlag ? "block" : "none",
+              cursor: "pointer",
+            }}
+          />
+        )}
+        {viewFlag === false && (
+          <ImEyeBlocked
+            onClick={setActivate}
+            style={{
+              display: hiddenBlogFlag ? "none" : "block",
+              cursor: "pointer",
+            }}
+          />
+        )}
+        {viewFlag === false && (
+          <RiDeleteBin6Fill
+            style={{ cursor: "pointer" }}
+            onClick={deleteBlog}
+          />
+        )}
       </div>
       <div className="top">
         <h2 className="title" hidden={editFlag}>
@@ -165,14 +212,18 @@ const EditBlog = ({ blog, removeBlog }) => {
           className="titleEdit"
           onChange={(e) => setTitleEdt(e.target.value)}
         />
-        <FaPencil
-          onClick={() => setEditFlag(!editFlag)}
-          style={{ display: editFlag ? "none" : "block" }}
-        />
-        <FaSave
-          onClick={saveEditedBlog}
-          style={{ display: !editFlag ? "none" : "block" }}
-        />
+        {viewFlag === false && (
+          <FaPencil
+            onClick={() => setEditFlag(!editFlag)}
+            style={{ display: editFlag ? "none" : "block", cursor: "pointer" }}
+          />
+        )}
+        {viewFlag === false && (
+          <FaSave
+            onClick={saveEditedBlog}
+            style={{ display: !editFlag ? "none" : "block", cursor: "pointer" }}
+          />
+        )}
       </div>
       <div className="catagories">
         {blog.Catagories.map((c, i) => {
@@ -196,7 +247,7 @@ const EditBlog = ({ blog, removeBlog }) => {
       <hr />
       <div className="ratingSection">
         Rate it:
-        <Rating />
+        <Rating ratingList={blog.RatingStars} id={blog._id} />
         <h3 className="avergeStars">
           <span>Average {avr}</span>
           <FaStar />
@@ -204,17 +255,40 @@ const EditBlog = ({ blog, removeBlog }) => {
       </div>
       <hr />
       <div className="comWrapper">
-        <h3>Comments</h3>
+        <div className="commentControls">
+          <h3>Comments</h3>
+          <h3
+            className="showCom"
+            hidden={showFlag}
+            onClick={() => setShowFlag(!showFlag)}
+          >
+            Show All
+          </h3>
+          <h3
+            className="hideCom"
+            hidden={!showFlag}
+            onClick={() => setShowFlag(!showFlag)}
+          >
+            Show less
+          </h3>
+        </div>
         <div className="comments">
-          {blog.Comments.length > 0 ? (
-            blog.Comments.map((c, i) => {
-              return (
-                <div className="com">
-                  <h4>{c.userID}</h4>
-                  <h6>{c.body}</h6>
-                </div>
-              );
-            })
+          {comments.length > 0 ? (
+            !showFlag ? (
+              <div className="com">
+                <h4>{comments[0].userName}</h4>
+                <h6>{comments[0].body}</h6>
+              </div>
+            ) : (
+              comments.map((c, i) => {
+                return (
+                  <div key={i} className="com">
+                    <h4>{c.userName}</h4>
+                    <h6>{c.body}</h6>
+                  </div>
+                );
+              })
+            )
           ) : (
             <div className="com">
               <h6>No comments on this blog yet</h6>
@@ -222,8 +296,13 @@ const EditBlog = ({ blog, removeBlog }) => {
           )}
         </div>
         <div className="addComment">
-          <input type="text" className="comInput" placeholder="add comment" />
-          <BsSendFill className="comBtn" />
+          <input
+            type="text"
+            className="comInput"
+            placeholder="add comment"
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <BsSendFill className="comBtn" onClick={addComent} />
         </div>
       </div>
     </div>
