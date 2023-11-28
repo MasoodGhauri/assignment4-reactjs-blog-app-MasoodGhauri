@@ -68,3 +68,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+![5a](https://github.com/MasoodGhauri/assignment4-reactjs-blog-app-MasoodGhauri/assets/134951004/d1bc5061-77a0-4a37-905b-f147944de020)
+![4a](https://github.com/MasoodGhauri/assignment4-reactjs-blog-app-MasoodGhauri/assets/134951004/c989d889-c814-494e-bf37-d352178e875f)
+![3a](https://github.com/MasoodGhauri/assignment4-reactjs-blog-app-MasoodGhauri/assets/134951004/9eb5211a-b28a-491a-94af-c9882c0cd401)
+![2a](https://github.com/MasoodGhauri/assignment4-reactjs-blog-app-MasoodGhauri/assets/134951004/2839206e-f5f7-4ddd-a45d-9d63190366f1)
+![1a](https://github.com/MasoodGhauri/assignment4-reactjs-blog-app-MasoodGhauri/assets/134951004/a304906b-62a5-43d0-8848-9331fec871fc)
+![localhost_3000_ (2)](https://github.com/MasoodGhauri/assignment4-reactjs-blog-app-MasoodGhauri/assets/134951004/84bcc168-96fb-49c2-9115-766a622d33f7)
+![localhost_3000_ (1)](https://github.com/MasoodGhauri/assignment4-reactjs-blog-app-MasoodGhauri/assets/134951004/8c550cc8-dcb4-42bb-b0d1-275b3fe12ac0)
+
